@@ -1,0 +1,25 @@
+@import url("https://uilight.netlify.app/main.css");
+
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0");
+
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap');
+
+:root {
+    --background-color: #ffffff;
+    --primary-color: #11d79c;
+    --text-color-primary: #525050;
+    --color-secondary: rgb(250, 249, 250);
+    --accent-color: #a5a0a0;
+    --container-border-color: #4a4949cb;
+    --overlay: rgba(92, 88, 88, 0.604);
+}
+
+* {
+    font-family: "Alegreya Sans", sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: var(--background-color);
+}
