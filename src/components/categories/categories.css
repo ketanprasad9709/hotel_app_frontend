@@ -1,0 +1,44 @@
+.categories { 
+    padding: 6rem 2rem 0.25rem 6rem;
+    position: fixed;
+    color: var(--text-color-primary);
+    gap: 5rem;
+    z-index: 1;
+    background-color: var(--background-color);
+    width: 100vw;
+}
+
+.gap-med {
+    gap: 2rem; 
+}
+
+.arrow-left {
+    left: 2rem;
+}
+
+.arrow-right {
+    right: 10rem;
+}
+
+.button.btn-category {
+    padding: 0;
+    top: 6rem;
+    border: 1px solid var(--accent-color);
+    border-radius: 50%;
+    color: var(--text-color-primary);
+    height: 24px;
+    width: 24px;
+}
+
+.button.btn-category:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.arr {
+    font-size: 23px;
+}
+
+.category {
+    border-bottom: 1px solid var(--text-color-primary);
+}
+
