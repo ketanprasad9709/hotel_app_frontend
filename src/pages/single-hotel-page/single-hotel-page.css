@@ -1,0 +1,22 @@
+.single-hotel-page {
+    padding-top: 7rem;
+    padding-right: 5rem;
+    padding-left: 12rem;
+    padding-bottom: 5rem;
+}
+
+.hotel-name-2 {
+    font-size: 2rem;
+    font-weight: 500;
+    padding-bottom: 0.3rem;
+    letter-spacing: 0.04rem;
+}
+
+.hotel-details {
+    justify-content: space-between;
+    padding-right: 6.5rem;
+}
+
+.price-box {
+    padding-top: 2rem;
+}

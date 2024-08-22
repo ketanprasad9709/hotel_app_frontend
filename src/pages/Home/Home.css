@@ -19,3 +19,25 @@
     font-size: 1.5rem;
     text-align: center;
 }
+
+.searchList {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+    top: 7rem;
+    left: 22rem;
+    padding-top: 0.5rem;
+    width: 25rem;
+    padding-left: 0.8rem;
+    border-radius: 5px;
+    gap: 0.4rem;
+    background-color: #fafafa;
+    font-size: 1.2rem;
+    color: rgb(116, 116, 116);
+}
+
+.searchList:hover {
+    cursor: pointer;
+}
+

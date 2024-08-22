@@ -3,8 +3,9 @@ import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import "./Home.css"
-import { Navbar, HotelCard, Categories } from "../../components";
+import { Navbar, HotelCard, Categories, SearchStayWithDate, SearchList } from "../../components";
 import { useCategory } from "../../context";
+import { useSearch } from "../../context";
 
 export const Home = () => {
     const [hasMore, sethasMore] = useState(true);
@@ -12,8 +13,17 @@ export const Home = () => {
     const [testData, settestData] = useState([]);
     const [hotels, sethotels] = useState([]);
     const [loadedData, setLoadedData] = useState([]);
+    const [searchFilteredData, setSearchFilteredData] = useState([]);
 
     const { state } = useCategory();
+    const { destination, searchModalStatus, searchListModal, dispatchSearch } = useSearch();
+
+    const handleClickedDestination = (addrss) => {
+        dispatchSearch({
+            type: "Clicked_Destination",
+            payload: addrss
+        });
+    };
 
     useEffect(() => {
         (async () => {
@@ -27,13 +37,18 @@ export const Home = () => {
                 console.log(err);
             }
         })()
-    }, [state]);
+    }, []);
 
     useEffect(() => {
         if(loadedData) {
             const filteredData = loadedData.filter(item => item.category === state);
             settestData(filteredData);
             sethotels(filteredData ? filteredData.slice(0, 16): []);
+
+            dispatchSearch({
+                type: "Update hotel data",
+                payload: loadedData
+            });
         }
     }, [state, loadedData]);
 
@@ -53,10 +68,37 @@ export const Home = () => {
         }
     }
 
+    useEffect(() => {
+        if(loadedData) {
+            const searchFilteredHotelData = loadedData.filter(item => item.address.toLowerCase().includes(destination.toLowerCase()) || item.city.toLowerCase().includes(destination.toLowerCase()));
+            setSearchFilteredData(searchFilteredHotelData);
+        }
+    }, [destination]);
+
+    searchFilteredData.forEach(hotel => {
+        console.log(hotel.address, hotel.city);
+    });
+
+    //console.log(searchFilteredData.address, searchFilteredData.city);
+
+
     return (
         <Fragment>
             <Navbar />
             <Categories/>
+            {searchModalStatus &&
+            <>
+            <SearchStayWithDate />
+            {searchListModal && (searchFilteredData.length===0 ?
+            <div className="searchList">
+                {loadedData.map(item => <SearchList onClick={() => handleClickedDestination(item.address)} key={item._id} Hotel_Element={item}/>)}
+            </div>:
+            <div className="searchList">
+                {searchFilteredData.map(item => <SearchList onClick={() => handleClickedDestination(item.address)} key={item._id} Hotel_Element={item}/>)}
+            </div>)}
+            
+            </> 
+            }
             {
                 hotels && hotels.length > 0 ? (
                     <InfiniteScroll
@@ -78,6 +120,9 @@ export const Home = () => {
         </Fragment>
     )
 };
+            
+            
+            
 
                     
                     
