@@ -1,11 +1,19 @@
+import{ useNavigate } from "react-router-dom";
+
 import "./hotelcard.css";
 
 export const HotelCard = ({hotel_element}) => {
 
     const { _id, name, image, address, state, price, rating} = hotel_element;
 
+    const navigate = useNavigate();
+
+    const handleGetID = (id) => {
+        navigate(`/hotels/${name}/${id}`);
+    }
+
     return (
-        <div className="hotelcard-container shadow cursor-pointer relative">
+        <div onClick={() => handleGetID(hotel_element._id)} className="hotelcard-container shadow cursor-pointer relative">
             <img className="img" src={image} alt={name.length > 35 ? `${name.slice(0,35)}...` : name}/>
             <div className="hotel-card-details">
                 <div className="first-row d-flex align-center">

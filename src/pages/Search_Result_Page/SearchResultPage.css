@@ -1,0 +1,15 @@
+.main {
+    padding: 11rem 3rem 2rem 3rem;
+}
+
+.gap-larger {
+    gap: 2.75rem;
+}
+
+.no-data {
+    padding: 20rem 3rem 2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
