@@ -7,3 +7,4 @@ export { Price } from "./Price/price";
 export { DateSelector } from "./DateSelector/dateEnabler";
 export { SearchStayWithDate } from "./searchStayWithDate/searchStayWithDate";
 export { SearchList } from "./searchList/searchList";
+export { FilterBox } from "./filters/filter";

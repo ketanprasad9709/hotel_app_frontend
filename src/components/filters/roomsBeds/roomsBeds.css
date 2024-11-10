@@ -1,0 +1,27 @@
+.buttons {
+    margin-left: 1rem;
+    width: 3rem;
+    border: 1px solid var(--accent-color);
+    border-radius: 1rem;
+}
+
+.buttons:hover {
+    cursor: pointer;
+}
+
+.buttons_filled {
+    margin-left: 1rem;
+    width: 3rem;
+    color: #fafafa;
+    border: 1px solid var(--accent-color);
+    background-color: var(--accent-color);
+    border-radius: 1rem;
+}
+
+.buttons_filled:hover {
+    cursor: pointer;
+}
+
+.room_details_text {
+    font-weight: 100;
+}

@@ -1,0 +1,19 @@
+.top_line{
+    justify-content: space-between;
+    padding-right: 0.7rem;
+}
+
+.filterText{
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.cancel{
+    color: rgb(240, 151, 35);
+    border-radius: 50%;
+}
+
+.cancel:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 2px 2px var(--accent-color);
+}
