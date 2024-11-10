@@ -3,9 +3,10 @@ import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import "./Home.css"
-import { Navbar, HotelCard, Categories, SearchStayWithDate, SearchList } from "../../components";
+import { Navbar, HotelCard, Categories, SearchStayWithDate, SearchList, FilterBox } from "../../components";
 import { useCategory } from "../../context";
-import { useSearch } from "../../context";
+import { useSearch, useFilter } from "../../context";
+import { StarRating } from "../../components/filters/starRating/starRating";
 
 export const Home = () => {
     const [hasMore, sethasMore] = useState(true);
@@ -17,6 +18,7 @@ export const Home = () => {
 
     const { state } = useCategory();
     const { destination, searchModalStatus, searchListModal, dispatchSearch } = useSearch();
+    const { filterModalStatus, priceRange, bedrooms, beds, bathrooms, propertyType, starRating, freeCancellation, apply_status } = useFilter();
 
     const handleClickedDestination = (addrss) => {
         dispatchSearch({
@@ -39,10 +41,44 @@ export const Home = () => {
         })()
     }, []);
 
-    useEffect(() => {
+    /*useEffect(() => {
         if(loadedData) {
             const filteredData = loadedData.filter(item => item.category === state);
             settestData(filteredData);
+            
+        }
+    }, [state, loadedData]);
+
+    useEffect(() => {
+        if(testData) {
+            const superFilteredData = testData.filter(item => ((item.price >= priceRange[0] && item.price <= priceRange[1]) && (bedrooms ? item.numberOfBedrooms === Number(bedrooms): true) && (bathrooms? item.numberOfBathrooms === Number(bathrooms): true) && (beds? item.numberOfBeds === Number(beds): true)));
+
+            sethotels(superFilteredData ? superFilteredData.slice(0, 16): []);
+
+            dispatchSearch({
+                type: "Update hotel data",
+                payload: loadedData
+            });
+        }
+    }, [apply_status]);*/
+
+    useEffect(() => {
+        if(loadedData && apply_status) {
+            const superFilteredData = loadedData.filter(item => ((item.category === state) && (item.price >= priceRange[0] && item.price <= priceRange[1]) && ((bedrooms?((bedrooms === "Any")? true: ((bedrooms === "5+")? item.numberOfBedrooms >= 5: item.numberOfBedrooms === Number(bedrooms))): true) || (bathrooms?((bathrooms === "Any")? true: ((bathrooms === "5+")? item.numberOfBathrooms >= 5: item.numberOfBathrooms === Number(bathrooms))): true) || (beds?((beds === "Any")? true: ((beds === "5+")? item.numberOfBeds >= 5: item.numberOfBeds === Number(beds))): true)) && (propertyType? item.propertyType === propertyType: true) && (starRating? item.rating >= Number(starRating[0]): true) && (freeCancellation? item.isCancelable === freeCancellation: item.isCancelable === false)));
+            settestData(superFilteredData);
+
+            sethotels(superFilteredData ? superFilteredData.slice(0, 16): []);
+
+            dispatchSearch({
+                type: "Update hotel data",
+                payload: loadedData
+            });
+        
+            
+        } else if (loadedData) {
+            const filteredData = loadedData.filter(item => item.category === state);
+            settestData(filteredData);
+
             sethotels(filteredData ? filteredData.slice(0, 16): []);
 
             dispatchSearch({
@@ -50,7 +86,9 @@ export const Home = () => {
                 payload: loadedData
             });
         }
-    }, [state, loadedData]);
+    }, [state, loadedData, apply_status]);
+
+    
 
     const fetchMoreData = () => {
         if(hotels.length >= testData.length){
@@ -81,6 +119,8 @@ export const Home = () => {
 
     //console.log(searchFilteredData.address, searchFilteredData.city);
 
+    console.log(`${typeof Number(bedrooms)} is datatype of bedroom.`);
+
 
     return (
         <Fragment>
@@ -98,6 +138,10 @@ export const Home = () => {
             </div>)}
             
             </> 
+            }
+            {filterModalStatus && 
+            <FilterBox />
+
             }
             {
                 hotels && hotels.length > 0 ? (

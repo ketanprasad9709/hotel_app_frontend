@@ -1,0 +1,27 @@
+.buttonStar {
+    margin-right: 1rem;
+    width: 5rem;
+    height: 2rem;
+    margin-top: 0.5rem;
+    border: 1px solid var(--accent-color);
+    border-radius: 1rem;
+}
+
+.buttonStar:hover{
+    cursor: pointer;
+}
+
+.buttonStar_filled {
+    margin-right: 1rem;
+    width: 5rem;
+    height: 2rem;
+    color: #fafafa;
+    margin-top: 0.5rem;
+    border: 1px solid var(--accent-color);
+    background-color: var(--accent-color);
+    border-radius: 1rem;
+}
+
+.buttonStar_filled:hover{
+    cursor: pointer;
+}
