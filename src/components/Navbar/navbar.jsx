@@ -1,17 +1,30 @@
 import { format } from 'date-fns';
+import { useLocation } from 'react-router-dom';
 
 import "./navbar.css";
-import { useSearch } from "./../../context";
+import { useSearch, useLoginSignUp, useWishlist } from "./../../context";
 
 
 export const Navbar = () => {
 
-    const { checkInDate, checkOutDate, destination, no_of_guests, dispatchSearch, searchModalStatus } = useSearch();
+    const { checkInDate, checkOutDate, destination, no_of_guests, wishlistStatus, dispatchSearch, searchModalStatus } = useSearch();
+    const { user_name, access_token, dispatchLogin_SignUp } = useLoginSignUp();
+    const { dispatchWishlist } = useWishlist();
+
+    const location = useLocation();
 
     const handleSearchClick = () => {
         dispatchSearch({
             type: "Open_Search_Modal"
         });
+    };
+
+    const handleLoginSignUpClick = () => {
+        !access_token ? dispatchLogin_SignUp({
+            type: "login_signUp_modal"
+        }) : dispatchWishlist({
+            type: "Wishlist-modal"
+        })
     };
 
     //console.log(`${checkInDate.toLocaleDateString("en-US", {day: "numeric", month: "short"})} is the date`);
@@ -40,7 +53,7 @@ export const Navbar = () => {
                 <span className="material-symbols-outlined search">search</span>
             </div>))}*/}
 
-            {!searchModalStatus && 
+            {!searchModalStatus && !location.pathname.includes("wishlist") &&
             (<div onClick={handleSearchClick} className="form-container d-flex align-center cursor-pointer shadow">
                 <span className="form-option">{destination || "Select Location"}</span>
                 <span className ="border-right-1px"></span>
@@ -63,7 +76,8 @@ export const Navbar = () => {
                 <span className="material-symbols-outlined search">search</span>
             </div>}*/}
             <nav className="d-flex align-center gap-large">
-                <div className="nav d-flex align-center cursor-pointer">
+                {user_name && <span className="userName">Hi! {user_name.split(" ")[0]}</span>}
+                <div onClick={handleLoginSignUpClick} className="nav d-flex align-center cursor-pointer">
                     <span className="material-symbols-outlined profile-option menu">menu</span>
                     <span className="material-symbols-outlined profile-option person">account_circle</span>
                 </div>

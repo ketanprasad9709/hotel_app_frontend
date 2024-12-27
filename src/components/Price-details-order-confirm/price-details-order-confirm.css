@@ -1,0 +1,90 @@
+.parent_summary_box_2 {
+    padding-top: 7rem;
+    padding-left: 2rem;
+    padding-right: 12rem;
+    width: 50%;
+    border-left: 1px solid #d9d7d7;
+    margin-left: 1rem;
+}
+
+.top_container_summary_2 {
+    padding-bottom: 1rem;
+}
+
+.hotel_text_rating {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 10rem;
+    padding-left: 1rem;
+}
+
+.hotel_name_summary {
+    font-size: 1.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15rem;
+}
+
+.city_state_summary {
+    font-size: 1rem;
+}
+
+.protection-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-top: 1px solid #d9d7d7;
+    border-bottom: 1px solid #d9d7d7;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.company_name {
+    font-size: 1.5rem;
+    padding: 0;
+    color: rgb(240, 151, 35);
+    font-weight: 900;
+}
+
+.price_summary_container {
+    padding-top: 1rem;
+}
+
+.price_details_text {
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+
+.hotel_1st_image {
+    width: auto;
+    height: 10rem;
+    border-radius: 1rem;
+}
+
+.star_icon {
+    color: rgb(240, 151, 35);
+}
+
+.price-calculation-container-2 {
+    border-bottom: 1px solid var(--container-border-color);
+    padding-bottom: 0.75rem;
+}
+
+.price-calculation-2 {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.service-fee-2 {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-2 {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+}

@@ -1,6 +1,6 @@
 import { useContext, useReducer, createContext } from "react";
 
-import { searchReducer } from "./../reducers"
+import { searchReducer } from "../reducers"
 
 const initialState = {
     searchModalStatus: false,
@@ -11,17 +11,18 @@ const initialState = {
     destination: "",
     no_of_guests: 0,
     max_guests: 8,
-    hotel_data_state: []
+    hotel_data_state: [],
+    single_hotel_data: []
 };
 
 const searchContext = createContext(initialState);
 
 const SearchProvider = ({children}) => {
 
-    const [{ searchModalStatus, searchListModal, checkInDate, checkOutDate, isValidCheckOut, destination, no_of_guests, max_guests, hotel_data_state }, dispatchSearch] = useReducer(searchReducer, initialState);
+    const [{ searchModalStatus, searchListModal, checkInDate, checkOutDate, isValidCheckOut, destination, no_of_guests, max_guests, hotel_data_state, single_hotel_data }, dispatchSearch] = useReducer(searchReducer, initialState);
     
     return (
-        <searchContext.Provider value = {{searchModalStatus, searchListModal, checkInDate, checkOutDate, isValidCheckOut, destination, no_of_guests, max_guests, hotel_data_state, dispatchSearch}}>
+        <searchContext.Provider value = {{searchModalStatus, searchListModal, checkInDate, checkOutDate, isValidCheckOut, destination, no_of_guests, max_guests, hotel_data_state, single_hotel_data, dispatchSearch}}>
             {children}
         </searchContext.Provider>
     )

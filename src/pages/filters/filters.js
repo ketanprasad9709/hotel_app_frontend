@@ -1,13 +1,16 @@
 import "./filters.css";
 
-import { FilterBox } from "../../components";
+import { Fragment } from "react";
+
+import { Price_details_order_confirm, Navbar } from "../../components";
 
 export const Filters = () => {
 
     return (
-        <div className="box">
-            <FilterBox/>
-        </div>
+        <Fragment>
+            <Navbar />
+            <Price_details_order_confirm />
+        </Fragment>
         
     )
 

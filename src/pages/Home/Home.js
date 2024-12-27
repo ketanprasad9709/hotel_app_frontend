@@ -3,9 +3,9 @@ import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import "./Home.css"
-import { Navbar, HotelCard, Categories, SearchStayWithDate, SearchList, FilterBox } from "../../components";
+import { Navbar, HotelCard, Categories, SearchStayWithDate, SearchList, FilterBox, AuthBox, WishlistLogout } from "../../components";
 import { useCategory } from "../../context";
-import { useSearch, useFilter } from "../../context";
+import { useSearch, useFilter, useLoginSignUp, useWishlist } from "../../context";
 import { StarRating } from "../../components/filters/starRating/starRating";
 
 export const Home = () => {
@@ -19,6 +19,8 @@ export const Home = () => {
     const { state } = useCategory();
     const { destination, searchModalStatus, searchListModal, dispatchSearch } = useSearch();
     const { filterModalStatus, priceRange, bedrooms, beds, bathrooms, propertyType, starRating, freeCancellation, apply_status } = useFilter();
+    const { access_token, login_signUp_modalStatus } = useLoginSignUp();
+    const { wishlistModal } = useWishlist();
 
     const handleClickedDestination = (addrss) => {
         dispatchSearch({
@@ -117,10 +119,6 @@ export const Home = () => {
         console.log(hotel.address, hotel.city);
     });
 
-    //console.log(searchFilteredData.address, searchFilteredData.city);
-
-    console.log(`${typeof Number(bedrooms)} is datatype of bedroom.`);
-
 
     return (
         <Fragment>
@@ -142,6 +140,12 @@ export const Home = () => {
             {filterModalStatus && 
             <FilterBox />
 
+            }
+            {
+                login_signUp_modalStatus && !(access_token) && <AuthBox />
+            }
+            {
+                wishlistModal && (access_token) && <WishlistLogout />
             }
             {
                 hotels && hotels.length > 0 ? (

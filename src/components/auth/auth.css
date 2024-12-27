@@ -1,0 +1,244 @@
+.login-signUp-outerBox {
+    width: 100vw;
+    height: 100vw;
+    background-color: #dedbdb7e;
+    z-index: 2;
+    position: fixed;
+    justify-content: end;
+}
+
+.login-signup-parentBox {
+    width: 20rem;
+    height: auto;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    padding-top: 0;
+    padding-bottom: 1rem;
+    z-index: 3;
+    position: fixed;
+    background-color: #fafafa;
+    border-radius: 1rem 1rem 0.5rem 0.5rem;
+}
+
+.topLine-dialogBox {
+    justify-content: space-between;
+    gap: 0;
+}
+
+.required {
+    color: red;
+    font-weight: 300;
+}
+
+.login {
+    width: 100%;
+    height: 3.2rem;
+    font-size: 1.35rem;
+    background-color: #fafafa;
+    border: none;
+    border-radius: 1rem 0 0 0;
+}
+
+.login:hover {
+    cursor: pointer;
+}
+
+.login_selected {
+    width: 100%;
+    height: 3.2rem;
+    font-size: 1.35rem;
+    color: #fafafa;
+    background-color: rgb(240, 151, 35);
+    border: none;
+    border-radius: 1rem 0 0 0;
+}
+
+.login_selected:hover {
+    cursor: pointer;
+}
+
+.signUp {
+    width: 100%;
+    height: 3.2rem;
+    font-size: 1.35rem;
+    background-color: #fafafa;
+    border: none;
+    border-radius: 0 0 1rem 0;
+}
+
+.signUp:hover {
+    cursor: pointer;
+}
+
+.signUp_selected {
+    width: 100%;
+    height: 3.2rem;
+    font-size: 1.35rem;
+    color: #fafafa;
+    background-color: rgb(240, 151, 35);
+    border: none;
+    border-radius: 0 0 1rem 0;
+}
+
+.signUp_selected:hover {
+    cursor: pointer;
+}
+
+.cancel-top {
+    margin-left: 1rem;
+    margin-bottom: 1.6rem;
+    margin-right: 0.1rem;
+    margin-top: 0.1rem;
+    color:  var(--accent-color);
+}
+
+.cancel-top:hover {
+    cursor: pointer;
+}
+
+.mobile-password-container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.inputs {
+    padding-bottom: 0.3rem;
+    border: none;
+    border-bottom: 1px solid #8a868679;
+    width: 100%;
+    background-color: #fafafa;
+}
+
+.inputs:focus {
+    outline: none;
+}
+
+.mobileNo-text:focus {
+    outline: none;
+    border-bottom: 1px solid #8a868679;
+}
+
+.password-fill:focus {
+    outline: none;
+    border-bottom: 1px solid #8a868679;
+}
+
+.or-container {
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+.or {
+    z-index: 3;
+    background-color: #fafafa;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.strike {
+    width: 90%;
+    height: .1rem;
+    border: none;
+    background-color: rgba(113, 111, 111, 0.252);
+    z-index: 2;
+    margin-top: 0.7rem;
+}
+
+.in-gap {
+    padding-top: 1.5rem;
+}
+
+.in-gap-2 {
+    margin-top: 1.4rem;
+}
+
+.in-gap-3 {
+    margin-top: 1.9rem;
+}
+
+.in-gap-4 {
+    margin-top: 1rem;
+}
+
+.in-gap-5 {
+    margin-top: 1.5rem;
+}
+
+.verify-container {
+    justify-content: center;
+}
+
+.verify {
+    width: 95%;
+    height: 2rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: #fafafa;
+    background-color: rgb(240, 151, 35);
+}
+
+.verify:hover {
+    cursor: pointer;
+}
+
+.login-container {
+    justify-content: center;
+}
+
+.Login-Test-Credentials {
+    width: 95%;
+    height: 2rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: #fafafa;
+    background-color: rgb(240, 151, 35);
+}
+
+.Login-Test-Credentials:hover {
+    cursor: pointer;
+}
+
+.Login-with-Gmail-container {
+    justify-content: center;
+}
+
+.Login-with-Gmail {
+    width: 95%;
+    height: 2rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: #fafafa;
+    background-color: rgb(240, 151, 35);
+}
+
+.Login-with-Gmail:hover {
+    cursor: pointer;
+}
+
+.signUp-containers {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.submit-container {
+    justify-content: center;
+    margin-top: 1.3rem;
+}
+
+.submit {
+    width: 95%;
+    height: 2rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: #fafafa;
+    background-color: rgb(240, 151, 35);
+}
+
+.submit:hover {
+    cursor: pointer;
+}
+

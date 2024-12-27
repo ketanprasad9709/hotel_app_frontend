@@ -1,0 +1,70 @@
+.parent_summary_box_1{
+    padding-top: 7rem;
+    padding-left: 12rem;
+    width: 50%;
+}
+
+.top-box {
+    border-bottom: 1px solid #d9d7d7;
+    margin-bottom: 1rem;
+}
+
+.summary {
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+    padding-bottom: 1rem;
+}
+
+.your_booking {
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding-bottom: 1rem;
+}
+
+.dates_guests {
+    font-size: 1.1rem;
+}
+
+.padding_dates_guests {
+    padding-bottom: 1rem;
+}
+
+.options_text {
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding-bottom: 0.5rem;
+}
+
+.payment_link {
+    display: block;
+    width: 80%;
+    height: 2.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: rgb(217, 246, 228);
+}
+
+.confirm_booking {
+    display: block;
+    width: 80%;
+    height: 2.5rem;
+    margin-top: 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: rgb(240, 151, 35);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #fafafa;
+}
+
+.confirm_booking:hover {
+    cursor: pointer;
+}
+
+.razor {
+    height: 2.1rem;
+    width: 9rem;
+}

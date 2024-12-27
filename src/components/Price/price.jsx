@@ -1,16 +1,20 @@
 import { differenceInDays } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 import { useState } from "react";
 
 import "./price.css";
 import { DateSelector } from "../DateSelector/dateEnabler";
-import { useSearch } from "../../context"
+import { useSearch,useLoginSignUp } from "../../context";
 
 export const Price = ({singleHotelElement}) => {
 
-    const { price, rating } = singleHotelElement;
+    const navigate = useNavigate();
+
+    const { _id, price, rating } = singleHotelElement;
 
     const { no_of_guests, checkInDate, checkOutDate, dispatchSearch } = useSearch();
+    const { access_token } = useLoginSignUp();
 
     const [guestTextVisibility, setGuestTextVisibility] = useState(true);
 
@@ -20,6 +24,8 @@ export const Price = ({singleHotelElement}) => {
 
     if(checkInDate && checkOutDate) {
         daysDifference = differenceInDays(checkOutDate, checkInDate);
+    } else {
+        daysDifference = 0;
     }
 
     //console.log(`${daysDifference} is the no of daysInWeek.`);
@@ -58,6 +64,10 @@ export const Price = ({singleHotelElement}) => {
         });
     };
 
+    const handleReserve = () => {
+        (access_token) ? ((checkInDate) ? ((checkOutDate) ? ((no_of_guests) ? navigate(`/book/stay/${_id}`) : alert("Enter number of guests.") ) : alert("Enter Check-Out Date")) : alert("Enter Check-In Date")) : alert("You need to login to reserve.")
+    }
+
     const maxValue = 10;
 
     console.log(`${no_of_guests} is the new guest value`);
@@ -90,7 +100,7 @@ export const Price = ({singleHotelElement}) => {
                 </div>
                 {/*{guestTextVisibility && <span>guests</span>}*/}
             </div>
-            <button className="reserve">Reserve</button>
+            <button onClick={handleReserve} className="reserve">Reserve</button>
             <div className="price-calculation-container">
                 <div className="price-calculation">
                     <p>₹{price} X {daysDifference} nights</p>

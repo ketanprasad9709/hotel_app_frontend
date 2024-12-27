@@ -1,5 +1,5 @@
 .categories { 
-    padding: 6rem 2rem 0.25rem 6rem;
+    padding: 6rem 2rem 1.25rem 6rem;
     position: fixed;
     color: var(--text-color-primary);
     gap: 5rem;
@@ -47,7 +47,7 @@
 }
 
 .filters {
-    margin: 5.6rem 2rem 0.25rem 86.2rem;
+    margin: 5.5rem 2rem 0.25rem 86.2rem;
     background-color: #fafafa;
     justify-content: center;
     gap: 0.3rem;

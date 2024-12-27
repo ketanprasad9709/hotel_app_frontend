@@ -11,7 +11,7 @@
 
 .img {
     width: 100%;
-    height: 70%;
+    height: 13.5rem;
     object-fit: cover;
     border-radius: 4px 4px 0 0;
 }
@@ -49,4 +49,12 @@
 
 .favourite {
     color: #71717a;
+}
+
+.favourite-red {
+    color: #ff2020;
+}
+
+.star-icon {
+    color: rgb(240, 151, 35);
 }
