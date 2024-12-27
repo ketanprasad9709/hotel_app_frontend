@@ -1,11 +1,16 @@
 import "./categories.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { useCategory, useFilter } from "../../context";
+import { useCategory, useFilter, useLoginSignUp } from "../../context";
+
+import { getWishlistHandler } from "../../services";
 
 export const Categories = () => {
     const { state, setState } = useCategory();
+
+    const navigate = useNavigate();
 
     const [categories, setCategories] = useState([]);
     const [testData, setTestData] = useState([]);
@@ -13,12 +18,18 @@ export const Categories = () => {
 
     const { apply_status, dispatchFilter } = useFilter();
 
+    const { access_token, user_ID } = useLoginSignUp();
+
     const handleLeftButtonClick = () => {
         setNumberOfCategoryToShow((curr) => curr - 10);
     }
 
-    const handleRightButtonClick = () => {
+    /*const handleRightButtonClick = () => {
         setNumberOfCategoryToShow((curr) => curr + 10);
+    }*/
+
+    const handleRightButtonClick = () => {
+        navigate("/filters");
     }
 
     const handleFilterClick = () => {

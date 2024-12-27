@@ -5,6 +5,8 @@ import App from './App';
 import { CategoryProvider } from './context';
 import { SearchProvider } from "./context";
 import { FilterProvider } from './context';
+import { LoginSignUpProvider } from "./context";
+import { WishlistProvider } from './context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,13 +15,19 @@ root.render(
       <CategoryProvider>
         <SearchProvider>
           <FilterProvider>
-            <App />
+            <LoginSignUpProvider>
+              <WishlistProvider>
+                <App />
+              </WishlistProvider>
+            </LoginSignUpProvider>
           </FilterProvider>
         </SearchProvider>
       </CategoryProvider>
     </Router>
   </React.StrictMode>
 );
+              
+            
         
     
     

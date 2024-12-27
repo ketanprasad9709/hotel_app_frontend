@@ -11,12 +11,12 @@ export const searchReducer = (state, {type, payload}) => {
             return {
                 ...state,
                 searchListModal: true
-            }
+            };
         case "Search_List_Modal":
             return {
                 ...state,
                 searchListModal: false
-            }
+            };
         case "Set_CheckIn_Date":
             return {
                 ...state,
@@ -58,6 +58,11 @@ export const searchReducer = (state, {type, payload}) => {
             return {
                 ...state,
                 hotel_data_state: payload
+            }
+        case "single_hotel_data_load":
+            return {
+                ...state,
+                single_hotel_data: payload
             }
         default:
             return state;

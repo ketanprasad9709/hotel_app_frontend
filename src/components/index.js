@@ -7,4 +7,8 @@ export { Price } from "./Price/price";
 export { DateSelector } from "./DateSelector/dateEnabler";
 export { SearchStayWithDate } from "./searchStayWithDate/searchStayWithDate";
 export { SearchList } from "./searchList/searchList";
+export { AuthBox } from "./auth/auth";
 export { FilterBox } from "./filters/filter";
+export { WishlistLogout } from "./wishlist-logout-box/wishlistLogout";
+export { Trip_Details_Order_Confirm } from "./Trip_Details_Order_Confirm/trip_Details_Order_Confirm";
+export { Price_details_order_confirm } from "./Price-details-order-confirm/price-details-order-confirm";

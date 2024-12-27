@@ -57,6 +57,7 @@
 .search {
     padding: 8px;
     background-color: rgb(240, 151, 35);
+    color: #fafafa;
     height: 100%;
     font-size: 1.875rem;
     border-radius: 0 4px 4px 0;
@@ -73,5 +74,12 @@
 
 .cursor-pointer:hover {
     cursor: pointer;
+}
+
+.userName {
+    color: #fafafa;
+    margin-right: 2rem;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 

@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 
 import "./SearchResultPage.css";
 
-import { Navbar, HotelCard, SearchStayWithDate, SearchList } from "../../components";
-import { useSearch } from "../../context";
+import { Navbar, HotelCard, AuthBox, WishlistLogout, SearchStayWithDate, SearchList } from "../../components";
+import { useSearch, useLoginSignUp, useWishlist } from "../../context";
 
 
 export const SearchResultPage = () => {
@@ -15,6 +15,8 @@ export const SearchResultPage = () => {
 
     const { destination } = useParams();
     const { hotel_data_state } = useSearch();
+    const { access_token, login_signUp_modalStatus } = useLoginSignUp();
+    const { wishlistModal } = useWishlist();
 
     /*useEffect(() => {
         (async () => {
@@ -42,6 +44,12 @@ export const SearchResultPage = () => {
     return (
         <Fragment>
             <Navbar />
+            {
+                login_signUp_modalStatus && !(access_token) && <AuthBox />
+            }
+            {
+                wishlistModal && (access_token) && <WishlistLogout />
+            }
             {searchResult.length>0 ?
             <main className="main d-flex align-center wrap gap-larger">
                 { searchResult.map(item => <HotelCard hotel_element={item} key={item._id}/>) }
