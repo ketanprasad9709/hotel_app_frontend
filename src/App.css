@@ -26,3 +26,8 @@ body {
     overflow-y: auto;
     background-color: var(--page-background-color);
 }
+
+html {
+    overflow-y: scroll;
+}
+

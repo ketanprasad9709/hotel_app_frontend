@@ -242,3 +242,11 @@
     cursor: pointer;
 }
 
+.toast-notify-user-exists {
+    background-color: #ebc183;
+    color: #080808;
+    font-size: 13px;
+    --toastify-color-progress-success: #e99218;
+    --toastify-color-success: #e99218;
+    --toastify-icon-color-success: #098963d7;
+}

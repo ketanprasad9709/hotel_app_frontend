@@ -8,10 +8,12 @@
 }
 
 .filter_box{
-    height: 35rem;
+    height: auto;
     width: 34rem;
     margin-top: 2rem;
     padding-left: 2rem;
+    padding-right: 0.7rem;
+    padding-bottom: 1.5rem;
     background-color: #fafafa;
     position: fixed;
     left: 50%;

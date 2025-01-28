@@ -15,8 +15,6 @@ export const PropertyType = () => {
             payload: type
         })
     };
-    
-    console.log(`${propertyType} is the property type.`);
 
     return ( 
         <div>

@@ -1,14 +1,16 @@
 import "./auth.css";
 
 import { useLoginSignUp, useWishlist } from "./../../context";
-import { signUpHandler, loginhandler } from "../../services";
-import { getWishlistHandler } from "../../services";
+import { signUpHandler, loginhandler, signUpTestHandler, getWishlistHandler } from "../../services";
 
 export const AuthBox = () => {
 
-    const { login, signUp, mobileNumberLogin, mobileNumberSignUp, name, email, password, signup_password, signup__confirm_password, access_token, user_name, user_ID, dispatchLogin_SignUp } = useLoginSignUp();
+    const { login, signUp, mobileNumberLogin, mobileNumberSignUp, name, email, password, signup_password, signup__confirm_password, dispatchLogin_SignUp } = useLoginSignUp();
 
-    const { wishlistData, dispatchWishlist } = useWishlist();
+    const { dispatchWishlist } = useWishlist();
+
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 
     const handleLoginClick = () => {
         dispatchLogin_SignUp({
@@ -35,7 +37,7 @@ export const AuthBox = () => {
         if(event.target.value.length <= 10) {
             dispatchLogin_SignUp({
                 type: "mobile-Number-signUp",
-                payload: Number(event.target.value)
+                payload: event.target.value
             })
         }
     };
@@ -81,17 +83,47 @@ export const AuthBox = () => {
         })
     }
 
-    const handleSubmitSignUp = () => {
+    const handleCredentialsCheck = async() => {
 
-        (mobileNumberSignUp == "") ? alert("Enter Mobile Number!") : ((name == "") ? alert("Enter your Name!") : (((/^[A-Za-z]+(?=.* ).+$/.test(name)) == false) ? alert("Enter a valid name!") : ((email == "") ? alert("Enter email ID!") : (((/^[a-z]+@[a-z]+\.[a-z]{2,3}$/.test(email)) == false) ? alert("Enter a valid email ID!") : ((signup_password == "") ? alert("Enter Password!") : ((signup__confirm_password  == "") ? alert("Re-enter Password!") : (((/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$*!&%]).{8,}$/.test(signup_password)) == false) ? alert("Password entered should contain atleast one lowercase letter, one uppercase letter, one digit, one special character from [ @ # $ * ! & % ] and should contain atleast 8 characters.") : ((signup_password !== signup__confirm_password) ? alert("Passwords don't match!") 
-        : ((() => {
-            signUpHandler(name, mobileNumberSignUp, email, signup_password);
-            dispatchLogin_SignUp({ type: "login_signUp_modal" });
-            dispatchLogin_SignUp({ type: "reset-signup-data" });
-          })()
-        )))))))))
+        if(mobileNumberSignUp == ""){
+            alert("Enter Mobile Number!");
+        } else if(name == ""){
+            alert("Enter your Name!");
+        } else if((/^[A-Za-z]+(?=.* )?.+$/.test(name)) == false){
+            alert("Enter a valid name!");
+        } else if (email == ""){
+            alert("Enter email ID!");
+        } else if((/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/.test(email)) == false){
+            alert("Enter a valid email ID!");
+        } else if(signup_password == ""){
+            alert("Enter Password!");
+        } else if(signup__confirm_password  == ""){
+            alert("Re-enter Password!");
+        } else if((/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$*!&%]).{8,}$/.test(signup_password)) == false){
+            alert("Password entered should contain atleast one lowercase letter, one uppercase letter, one digit, one special character from [ @ # $ * ! & % ] and should contain atleast 8 characters.");
+        } else if(signup_password !== signup__confirm_password){
+            alert("Passwords don't match!");
+        } else{
+                const response = await signUpTestHandler(mobileNumberSignUp, email);
+                await delay(500); 
 
-    };
+                if(response.data.exists == true){
+                    dispatchLogin_SignUp({ type: "sign_up_test" });
+                    return;
+                } else if (response.data.exists == false) {
+                    (() => {
+                        signUpHandler(name, mobileNumberSignUp, email, signup_password);
+                        dispatchLogin_SignUp({ type: "login_signUp_modal" });
+                        dispatchLogin_SignUp({ type: "reset-signup-data" });
+                        dispatchLogin_SignUp({
+                                type: "signUp_data_post"
+                        });
+                        })()
+                        return;
+                    }
+                
+        }};
+
 
     const handleAccessToken = (accessToken) => {
         dispatchLogin_SignUp({ 
@@ -104,6 +136,20 @@ export const AuthBox = () => {
         dispatchLogin_SignUp({ 
             type: "access-details-username", 
             payload: username 
+        });
+    }
+
+    const handleNumber = (mobileNumber) => {
+        dispatchLogin_SignUp({ 
+            type: "access-details-number", 
+            payload: mobileNumber 
+        });
+    }
+
+    const handleEmailAddress = (email) => {
+        dispatchLogin_SignUp({ 
+            type: "access-details-email", 
+            payload: email
         });
     }
 
@@ -136,44 +182,44 @@ export const AuthBox = () => {
         }
 
         const data = await loginhandler(mobileNumberLogin, password);
+
         if (data === false){
             alert("Enter correct user details.");
         }else{
-            const { accessToken, username, _id } = data;
-            console.log(`${accessToken} is access token`);
-            console.log(`${username} is user name`);
-            console.log(`${_id} is userID.`);
+            const { accessToken, username, number, email, _id } = data;
 
             handleloginSignUpModal();
             handleAccessToken(accessToken);
             handleUsername(username);
+            handleNumber(number);
+            handleEmailAddress(email);
             handleIDdata(_id);
 
             const hotelIDS = await getWishlistHandler(_id, accessToken);
-            console.log(hotelIDS);
 
             handleWishlistData(hotelIDS);
 
         }
     }; 
     
-    /*const handleGetWishlistData = async() => {
-
-        await getWishlistHandler(user_ID, access_token);
-        console.log(`${access_token} is stored token.`);
-        console.log(`${user_name} is stored user name.`);
-            
-    }
+    const handleLoginTest = (event) => {
         
-    const handleLoginEvent = async(event) => {
+        event.preventDefault();
 
-        await handleLoginVerify(event);
-        await handleGetWishlistData();
-    };*/
-    
-    /*const handlewishdata = (wishlistData) => {
-        console.log(wishlistData);
-    };*/
+        const accessToken = "aabbccyy";
+        const username = "Test";
+        const number = 9000000000;
+        const email = "xyz@abc.com";
+        const _id = "1234567abc";
+
+        handleloginSignUpModal();
+        handleAccessToken(accessToken);
+        handleUsername(username);
+        handleNumber(number);
+        handleEmailAddress(email);
+        handleIDdata(_id);
+
+    };
 
     return(
         <div className="d-flex login-signUp-outerBox">
@@ -197,7 +243,7 @@ export const AuthBox = () => {
                         <button className="in-gap-2 verify" onClick={handleLoginVerify}>Verify</button>
                     </div>
                     <div className="d-flex login-container">
-                        <button className="in-gap-2 Login-Test-Credentials" /*onClick={() => handlewishdata(wishlistData)}*/>Login with Test Credentials</button>
+                        <button className="in-gap-2 Login-Test-Credentials" onClick={handleLoginTest}>Login with Test Credentials</button>
                     </div>
                     <div className="d-flex or-container relative">
                         <hr className="strike"/>
@@ -230,13 +276,19 @@ export const AuthBox = () => {
                         <input className="inputs" type="password" placeholder="Re-enter Password" defaultValue={signup__confirm_password} onChange={handleSignupConfirmPassword} />
                     </div>
                     <div className="d-flex submit-container">
-                        <button className="in-gap-4 submit" onClick={handleSubmitSignUp}>Submit</button>
+                        <button className="in-gap-4 submit" onClick={handleCredentialsCheck}>Submit</button>
                     </div>
                 </div>}
             </div>
+            
         </div>
     )
 };
+
+
+    
+
+
         
                     
                     

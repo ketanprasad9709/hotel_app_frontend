@@ -21,6 +21,7 @@ export const CancellationAvailability = () => {
     }
 
     const GreenSwitch = styled(Switch)(({ theme }) => ({
+      
         '& .MuiSwitch-switchBase.Mui-checked': {
           color: green[500],
           '&:hover': {
@@ -31,8 +32,6 @@ export const CancellationAvailability = () => {
           backgroundColor: green[500],
         },
       }));
-
-    console.log(`${freeCancellation} is the cancelation status.`);
 
     return (
         <div className="d-flex align-center cancellation">

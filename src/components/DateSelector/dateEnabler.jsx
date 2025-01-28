@@ -1,10 +1,10 @@
+import DatePicker from "react-datepicker";
+
 import "./dateEnabler.css"
 import "react-datepicker/dist/react-datepicker.css";
 
-import DatePicker from "react-datepicker";
-//import { useState } from "react";
-
 import { useSearch } from "../../context";
+import { useEffect } from "react";
 
 export const DateSelector = ({typeOf}) => {
     
@@ -15,6 +15,7 @@ export const DateSelector = ({typeOf}) => {
             type: typeOf==="checkIn" ? "Set_CheckIn_Date": "Set_CheckOut_Date",
             payload: date
         });
+
     };
 
     const handleSearchResultModal = () => {
@@ -22,8 +23,20 @@ export const DateSelector = ({typeOf}) => {
             type: "Search_List_Modal"
         });
     };
-    
-    console.log({checkInDate, checkOutDate});
+
+    useEffect(() => {
+        if(checkInDate && checkOutDate && checkOutDate < checkInDate){
+            dispatchSearch({
+                type: "Set_CheckOut_Date",
+                payload: null
+            })}
+    }, [checkInDate, checkOutDate]);
+
+    const addOneDay= (date) => {
+        const newDate = new Date(date);
+        newDate.setDate(newDate.getDate() + 1);
+        return newDate;
+    };
 
     return (
         <DatePicker 
@@ -33,8 +46,11 @@ export const DateSelector = ({typeOf}) => {
         dateFormat="dd/MM/yyyy" 
         placeholderText="Add date" 
         closeOnScroll={true} 
-        minDate={new Date()}
-        onChange={(date) => handleDateChange(date)} />
+        minDate={typeOf==="checkIn" ? new Date(): checkInDate && addOneDay(checkInDate)}
+        onChange={(date) => handleDateChange(date)}
+        onKeyDown={(e) => e.preventDefault()} />
     )
 }
+        
+        
         

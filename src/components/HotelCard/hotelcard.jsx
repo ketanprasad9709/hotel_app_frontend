@@ -1,36 +1,46 @@
 import{ useNavigate } from "react-router-dom";
 
 import "./hotelcard.css";
-import { wishlistHandler, deleteWishlistHandler } from "./../../services";
+
+import { saveWishlistHandler, deleteWishlistHandler } from "./../../services";
 import { useLoginSignUp, useWishlist } from "../../context";
 
 export const HotelCard = ({hotel_element}) => {
 
-    const { _id, name, image, address, state, price, rating} = hotel_element;
+    const { name, image, address, state, price, rating} = hotel_element;
 
-    const { access_token, user_ID, dispatchLogin_SignUp } = useLoginSignUp();
+    const { access_token, user_ID, user_name, dispatchLogin_SignUp } = useLoginSignUp();
 
     const { wishlistData, dispatchWishlist } = useWishlist();
 
     const navigate = useNavigate();
 
     const handleGetID = (id) => {
-        navigate(`/hotels/${name}/${id}`);
+        navigate(`/hotels/single/${id}`);
     }
 
     const handleWishlistClick = (id, user_ID, access_token) => {
-        !(wishlistData.includes(id)) ? wishlistHandler(id, user_ID, access_token) : deleteWishlistHandler(id, user_ID, access_token);
-        !(access_token) ? dispatchLogin_SignUp({
-            type: "login_signUp_modal" }) : (!(wishlistData.includes(id)) ? dispatchWishlist({
-                        type: "store-wishlist-data",
-                        payload: [id]
-                    }) : dispatchWishlist({
-                        type: "delete-wishlist-data",
-                        payload: id
-                    }));
-        }
-
-    console.log(wishlistData);
+        if(user_name == "Test"){
+            !(access_token) ? dispatchLogin_SignUp({
+                type: "login_signUp_modal" }) : (!(wishlistData.includes(id)) ? dispatchWishlist({
+                            type: "store-wishlist-data",
+                            payload: [id]
+                        }): dispatchWishlist({
+                            type: "delete-wishlist-data",
+                            payload: id
+                        }));
+        } else{
+            !(wishlistData.includes(id)) ? saveWishlistHandler(id, user_ID, access_token) : deleteWishlistHandler(id, user_ID, access_token);
+            !(access_token) ? dispatchLogin_SignUp({
+                type: "login_signUp_modal" }) : (!(wishlistData.includes(id)) ? dispatchWishlist({
+                            type: "store-wishlist-data",
+                            payload: [id]
+                        }): dispatchWishlist({
+                            type: "delete-wishlist-data",
+                            payload: id
+                        }));
+        };
+    };
 
     return (
         <div className="hotelcard-container shadow cursor-pointer relative">
@@ -57,4 +67,3 @@ export const HotelCard = ({hotel_element}) => {
         </div>
     )
 }
-                

@@ -1,5 +1,3 @@
-
-
 export const searchReducer = (state, {type, payload}) => {
     switch(type) {
         case "Open_Search_Modal":
@@ -23,8 +21,6 @@ export const searchReducer = (state, {type, payload}) => {
                 checkInDate: payload
             };
         case "Set_CheckOut_Date":
-            
-
             return {
                 ...state,
                 checkOutDate: payload
@@ -64,7 +60,23 @@ export const searchReducer = (state, {type, payload}) => {
                 ...state,
                 single_hotel_data: payload
             }
+        case "final-price-handler":
+            return {
+                ...state,
+                finalPrice: payload
+            }
+        case "reset_search_bar_data":
+            return {
+                ...state,
+                checkInDate: null,
+                checkOutDate: null,
+                destination: "",
+                no_of_guests: 0
+            }
         default:
             return state;
     }
 };
+            
+
+

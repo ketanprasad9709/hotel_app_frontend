@@ -13,11 +13,12 @@
 
 .hotel_text_rating {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     height: 10rem;
     padding-left: 1rem;
+    flex-direction: column;
+    justify-content: space-between;
 }
+    
 
 .hotel_name_summary {
     font-size: 1.7rem;
@@ -30,13 +31,14 @@
 }
 
 .protection-text {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     font-size: 1.1rem;
     font-weight: 500;
     border-top: 1px solid #d9d7d7;
     border-bottom: 1px solid #d9d7d7;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
 }
+    
 
 .company_name {
     font-size: 1.5rem;

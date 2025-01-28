@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import "./filter.css";
 
 import { PriceCard } from "./priceRange/priceRange";

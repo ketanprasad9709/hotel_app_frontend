@@ -32,11 +32,9 @@ export const RoomsBeds = () => {
         })
     }
 
-    console.log(`${bedrooms} is the no of bedrooms. ${beds} is the no of beds. ${bathrooms} is the no of bathrooms`);
-
     return (
         <>
-            <p className="topText">Rooms & Beds</p>
+            <p className="topText rooms-text">Rooms & Beds</p>
             <div className="d-flex align-center">
                 
                 <div className="room_details_text">

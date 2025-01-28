@@ -4,7 +4,7 @@ import { useFilter } from "../../../context";
 
 export const ClearApply = () => {
 
-    const { apply_status, filterModalStatus, dispatchFilter } = useFilter();
+    const { dispatchFilter } = useFilter();
 
     const handleApply = () => {
 
@@ -22,8 +22,6 @@ export const ClearApply = () => {
             type: "clear_all"
         })
     }
-
-    console.log(`${apply_status} is the apply status.`);
 
     return (
         <div className="d-flex align-center bottom_part">

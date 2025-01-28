@@ -1,6 +1,11 @@
+.parent-top {
+    overflow: visible; 
+}
+
 .main {
     padding: 11rem 3rem 2rem 3rem;
 }
+
 
 .gap-larger {
     gap: 2.75rem;
@@ -26,7 +31,7 @@
     flex-direction: column;
     z-index: 3;
     top: 7rem;
-    left: 22rem;
+    left: 22.4rem;
     padding-top: 0.5rem;
     width: 25rem;
     padding-left: 0.8rem;
@@ -39,5 +44,30 @@
 
 .searchList:hover {
     cursor: pointer;
+}
+
+.toast-notify-login {
+    background-color: #ebc183;
+    color: #080808;
+    font-size: 13px;
+    --toastify-color-progress-success: #e99218;
+    --toastify-color-success: #e99218;
+    --toastify-icon-color-success: #098963d7;
+}
+
+.toast-notify-logout {
+    background-color: #ebc183;
+    color: #080808;
+    font-size: 13px;
+    --toastify-color-progress-success: #e99218;
+    --toastify-color-success: #e99218;
+    --toastify-icon-color-success: #098963d7;
+}
+
+.NoData {
+    display: flex;
+    justify-content: center;
+    padding-top: 22rem;
+    font-size: 2rem;
 }
 
