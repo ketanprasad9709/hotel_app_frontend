@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from "react-router-dom"
 
 import "./wishlistLogout.css"
 
-import { useWishlist, useSearch, useLoginSignUp } from "../../context";
+import { useWishlist, useLoginSignUp } from "../../context";
 
 export const WishlistLogout = () => {
 
@@ -11,7 +11,6 @@ export const WishlistLogout = () => {
 
     const { dispatchWishlist } = useWishlist();
     const { dispatchLogin_SignUp } = useLoginSignUp();
-    const { dispatchSearch } = useSearch();
 
     const handleWishClick = () => {
         dispatchWishlist({
@@ -33,6 +32,9 @@ export const WishlistLogout = () => {
         dispatchWishlist({
             type: "Wishlist-modal"
         });
+        dispatchLogin_SignUp({
+            type: "logout-status"
+        })
         navigate("/");
     } 
 
@@ -47,11 +49,11 @@ export const WishlistLogout = () => {
             <div className="logout-innerbox relative">
                 {!location.pathname.includes("wishlist") &&
                 <div onClick={handleWishClick} className="d-flex align-center gap-def wishlist-area">
-                    <span class="material-symbols-outlined favorite">favorite</span>
+                    <span className="material-symbols-outlined favorite">favorite</span>
                     <p className="WishList">Wishlist</p>
                 </div>}
                 <div onClick={handleLogOut} className="d-flex align-center gap-def logout-area">
-                    <span class="material-symbols-outlined logout">logout</span>
+                    <span className="material-symbols-outlined logout">logout</span>
                     <p className="LogOut">Logout</p>
                 </div>
                 <span onClick={handleWishlistCloseClick} className="material-symbols-outlined close-wishlist-box absolute">cancel</span>

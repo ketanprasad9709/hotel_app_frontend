@@ -1,11 +1,11 @@
 import { differenceInDays } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./price.css";
+
 import { DateSelector } from "../DateSelector/dateEnabler";
-import { useSearch,useLoginSignUp } from "../../context";
+import { useSearch, useLoginSignUp } from "../../context";
 
 export const Price = ({singleHotelElement}) => {
 
@@ -13,7 +13,7 @@ export const Price = ({singleHotelElement}) => {
 
     const { _id, price, rating } = singleHotelElement;
 
-    const { no_of_guests, checkInDate, checkOutDate, dispatchSearch } = useSearch();
+    const { no_of_guests, checkInDate, checkOutDate, finalPrice, dispatchSearch } = useSearch();
     const { access_token } = useLoginSignUp();
 
     const [guestTextVisibility, setGuestTextVisibility] = useState(true);
@@ -22,15 +22,19 @@ export const Price = ({singleHotelElement}) => {
 
     let daysDifference;
 
-    if(checkInDate && checkOutDate) {
+    if(checkInDate && checkOutDate){
         daysDifference = differenceInDays(checkOutDate, checkInDate);
-    } else {
+    }else{
         daysDifference = 0;
-    }
+    };
 
-    //console.log(`${daysDifference} is the no of daysInWeek.`);
-
-    
+    useEffect(() => {
+    if(checkInDate && checkOutDate) {
+        dispatchSearch({
+            type: "final-price-handler",
+            payload: price*daysDifference + service_fee
+        })
+    }}, [checkInDate, checkOutDate]);
 
     const handleGuestNumberSinglePage = (event) => {
         dispatchSearch({
@@ -70,14 +74,12 @@ export const Price = ({singleHotelElement}) => {
 
     const maxValue = 10;
 
-    console.log(`${no_of_guests} is the new guest value`);
-
     return (
         <div className="price-container shadow">
             <div className="d-flex align-center price-star">
                 <p><span className="price-in-container">₹{price}</span> per night</p>
                 <p className="d-flex align-center star-font-text">
-                    <span className="material-symbols-outlined">star</span>
+                    <span className="material-symbols-outlined star_price">star</span>
                     <span>{rating}</span>
                 </p>
             </div>
@@ -98,7 +100,6 @@ export const Price = ({singleHotelElement}) => {
                     <input className="guests-number" defaultValue={no_of_guests} value={no_of_guests} max={maxValue} readOnly onInvalid={handleInvalid} onFocus={handleFocus} onBlur={handleBlur} type="number" onChange={handleGuestNumberSinglePage} />
                     <span class="material-symbols-outlined plus-minus-single-page" onClick={handleIncreaseGuests}>add</span>
                 </div>
-                {/*{guestTextVisibility && <span>guests</span>}*/}
             </div>
             <button onClick={handleReserve} className="reserve">Reserve</button>
             <div className="price-calculation-container">
@@ -113,7 +114,7 @@ export const Price = ({singleHotelElement}) => {
             </div>
             <div className="total">
                 <p>Total</p>
-                <p>₹{price*daysDifference + service_fee}</p>
+                <p>₹{finalPrice}</p>
             </div>
         </div>
     )

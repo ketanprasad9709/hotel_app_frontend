@@ -1,6 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 import "./wishlist.css"
 
@@ -9,8 +8,6 @@ import { useWishlist, useLoginSignUp } from "../../context";
 
 
 export const Wishlist = () => {
-
-    const navigate = useNavigate();
 
     const { wishlistData, wishlistModal } = useWishlist();
     const { access_token } = useLoginSignUp();
@@ -32,16 +29,12 @@ export const Wishlist = () => {
         })()}
     , [])
 
-    console.log(hotels);
-
     useEffect(() => {
 
         const wishListHotelData = wishlistData.map(ID => hotels.find(hotel => hotel._id == ID));
         setWishlistHotels(wishListHotelData);
         }
-    , [hotels, wishlistData])
-        
-    console.log(wishlistHotels);
+    , [hotels, wishlistData]);
 
     if(!access_token){
         return (

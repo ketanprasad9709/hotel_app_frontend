@@ -16,8 +16,6 @@ export const StarRating = () => {
         })
     };
 
-    console.log(`${starRating} is the star Rating.`);
-
     return (
         <>
             <p className="topText">Star Rating</p>

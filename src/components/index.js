@@ -12,3 +12,4 @@ export { FilterBox } from "./filters/filter";
 export { WishlistLogout } from "./wishlist-logout-box/wishlistLogout";
 export { Trip_Details_Order_Confirm } from "./Trip_Details_Order_Confirm/trip_Details_Order_Confirm";
 export { Price_details_order_confirm } from "./Price-details-order-confirm/price-details-order-confirm";
+export { Summary } from "./summary/summary";

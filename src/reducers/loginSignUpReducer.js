@@ -13,6 +13,16 @@ export const loginSignUpReducer = (state, {type, payload}) => {
                 signUp: true,
                 login: false
             };
+        case "sign_up_test":
+            return {
+                ...state,
+                signup_test: !state.signup_test
+            }
+        case "signUp_data_post":
+            return {
+                ...state,
+                signUp_postData_status: !state.signUp_postData_status
+            }
         case "login_signUp_modal":
             return{
                 ...state,
@@ -63,6 +73,16 @@ export const loginSignUpReducer = (state, {type, payload}) => {
                 ...state,
                 user_name: payload
             }
+        case "access-details-number":
+            return {
+                ...state,
+                mobile_number: payload
+            }
+        case "access-details-email":
+            return {
+                ...state,
+                email_address: payload
+            }
         case "access-details-_id":
             return {
                 ...state,
@@ -90,6 +110,11 @@ export const loginSignUpReducer = (state, {type, payload}) => {
                 access_token: "",
                 user_name: "",
                 user_ID: ""
+            }
+        case "logout-status":
+            return {
+                ...state,
+                logout: !state.logout
             }
         default:
             return state;

@@ -2,19 +2,11 @@ import { differenceInDays } from 'date-fns';
 
 import "./price-details-order-confirm.css"
 
-import axios from "axios";
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-
 import { useSearch } from "../../context";
 
 export const Price_details_order_confirm= ({singleHotelData}) => {
 
-    
-
-    const { checkInDate, checkOutDate } = useSearch();
-
-    /*const { id } = useParams();*/
+    const { checkInDate, checkOutDate, finalPrice } = useSearch();
 
     const service_fee= 150;
     let daysDifference;
@@ -24,19 +16,6 @@ export const Price_details_order_confirm= ({singleHotelData}) => {
     } else {
         daysDifference = 0;
     }
-
-    /*const [singleHotelConfirm, setSingleHotelConfirm] = useState([]);
-
-    useEffect(() => {
-        (async() => {
-            try{
-                const { data } = await axios.get(`https://hotels-app-k5v8.onrender.com/api/hotels/${id}`)
-                setSingleHotelConfirm(data);
-            }catch(err){
-                console.log("Hotel confirm data not found.")
-            }
-        
-    })()}, [])*/
 
     const { price, image, name, city, state, rating } = singleHotelData;
 
@@ -70,9 +49,10 @@ export const Price_details_order_confirm= ({singleHotelData}) => {
                 </div>
                 <div className="total-2">
                     <p>Total</p>
-                    <p>₹{price*daysDifference + service_fee}</p>
+                    <p>₹{finalPrice}</p>
                 </div>
             </div>
         </div>
     )
 }
+    

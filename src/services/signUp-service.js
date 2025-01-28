@@ -11,8 +11,8 @@ export const signUpHandler = async(name, mobileNumberSignUp, email, signup_passw
                 password: signup_password
             }
         );
-        console.log(`${data} is submitted`);
-        console.log(data);
+        
+        return data;
 
     }catch(err){
         console.log("data not submitted.");

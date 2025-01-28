@@ -1,5 +1,3 @@
-import { PropertyType } from "../components/filters/propertyType/propertyType";
-
 export const filterReducer = (state, {type, payload}) => {
 
     switch(type){

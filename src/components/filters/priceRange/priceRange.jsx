@@ -1,6 +1,6 @@
-import { useState } from "react";
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
+import { styled } from '@mui/material';
 
 import { useFilter } from "../../../context";
 
@@ -12,8 +12,6 @@ export const PriceCard = () => {
 
     const { priceRange, dispatchFilter } = useFilter();
 
-    /*const [value, setValue] = useState([200, 15000]);*/
-
     const handleChange = (event) => {
         
         dispatchFilter({
@@ -21,9 +19,6 @@ export const PriceCard = () => {
           payload: event.target.value
         });
     };
-
-    console.log(`${priceRange} is the new price range value.`);
-
 
     return (
         <div>
@@ -36,7 +31,16 @@ export const PriceCard = () => {
               valueLabelDisplay="on"
               getAriaValueText={valuetext}
               sx={{
-                color: '#57a715'
+                color: '#57a715',
+                '& .MuiSlider-thumb': {
+                  transform: 'translateY(22px)', // Move the thumb downward by 10px
+                },
+                '& .MuiSlider-track': {
+                  transform: 'translateY(30px)', // Move the track downward by 10px as well
+                },
+                '& .MuiSlider-rail': {
+                  transform: 'translateY(30px)', // Optional: move the rail (background) downward as well
+                },
               }}
               min={200}
               max={25000}

@@ -5,6 +5,9 @@ import { loginSignUpReducer } from "./../reducers";
 const initialState = {
     login: true,
     signUp: false,
+    signUp_postData_status: false,
+    signup_test: false,
+    logout: false,
     login_signUp_modalStatus: false,
     mobileNumberLogin: "",
     mobileNumberSignUp: "",
@@ -15,6 +18,8 @@ const initialState = {
     signup__confirm_password: "",
     access_token: "",
     user_name: "",
+    mobile_number: null,
+    email_address: "",
     user_ID: ""
 };
 
@@ -22,10 +27,10 @@ const login_signUp = createContext(initialState);
 
 const LoginSignUpProvider = ({children}) => {
 
-    const [ { login, signUp, login_signUp_modalStatus, mobileNumberLogin, mobileNumberSignUp, name, email, password, signup_password, signup__confirm_password, access_token, user_name, user_ID }, dispatchLogin_SignUp ]= useReducer(loginSignUpReducer, initialState );
+    const [ { login, signUp, signUp_postData_status, signup_test, logout, login_signUp_modalStatus, mobileNumberLogin, mobileNumberSignUp, name, email, password, signup_password, signup__confirm_password, access_token, user_name, mobile_number, email_address, user_ID }, dispatchLogin_SignUp ]= useReducer(loginSignUpReducer, initialState );
 
         return (
-            <login_signUp.Provider value={{ login, signUp, login_signUp_modalStatus, mobileNumberLogin, mobileNumberSignUp, name, email, password, signup_password, signup__confirm_password, access_token, user_name, user_ID, dispatchLogin_SignUp }}>
+            <login_signUp.Provider value={{ login, signUp, signUp_postData_status, signup_test, logout, login_signUp_modalStatus, mobileNumberLogin, mobileNumberSignUp, name, email, password, signup_password, signup__confirm_password, access_token, user_name, mobile_number, email_address, user_ID, dispatchLogin_SignUp }}>
                 {children}
             </login_signUp.Provider>
         )

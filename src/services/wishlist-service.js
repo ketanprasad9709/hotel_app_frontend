@@ -1,6 +1,6 @@
 import axios from "axios"; 
 
-export const wishlistHandler = async(_id, userid, token) => {
+export const saveWishlistHandler = async(_id, userid, token) => {
 
     try{
 
@@ -13,9 +13,6 @@ export const wishlistHandler = async(_id, userid, token) => {
             },
             config
         )
-
-        console.log("Wishlist is added.");
-        console.log(data);
     }catch(err){
         console.log("Unable to add to wishlist.");
     }
@@ -34,9 +31,7 @@ export const getWishlistHandler = async(userid, token) => {
         );
 
         const hotelIDS = data.map(item => item.hotelID);
-
-        console.log("Wishlist found.");
-        console.log(hotelIDS);
+        
         return hotelIDS;
 
     }catch(err){

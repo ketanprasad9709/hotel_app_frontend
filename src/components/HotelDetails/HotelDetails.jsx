@@ -1,5 +1,6 @@
-import "./HotelDetails.css";
 import { Fragment } from "react";
+
+import "./HotelDetails.css";
 
 export const HotelDetails = ({singleHotelElement}) => {
     const { hostName, numberOfguest, numberOfBedrooms, numberOfBeds, numberOfBathrooms } = singleHotelElement

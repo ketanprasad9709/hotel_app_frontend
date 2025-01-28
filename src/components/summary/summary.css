@@ -1,0 +1,100 @@
+.summary-container {
+    margin-top: 10rem;
+    margin-left: 27rem;
+    margin-right: 27rem;
+    border: 1px solid var(--text-color-secondary);
+    border-radius: 1.5rem;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.congrats-confirmed {
+    margin-top: 1rem;
+}
+
+.congrats {
+    color: rgb(240, 151, 35);
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+    
+
+.Booking_confirmed {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.Order_Details {
+    margin-top: 1.5rem;
+    background-color: #11d79c6f;
+    color: #fafafa;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-weight: 900;
+    text-shadow: 
+        1px 1px 0 black, 
+        -1px 1px 0 black, 
+        1px -1px 0 black, 
+        -1px -1px 0 black;
+    letter-spacing: 0.2rem;
+}
+
+.Booked-Hotel-Details {
+    margin-top: 2rem;
+}
+
+.gap-details-summary {
+    gap: 1rem;
+}
+
+.detail-name {
+    flex-direction: column;
+    padding-right: 1rem;
+    font-weight: 500;
+    color: var(--text-color-secondary);
+}
+
+.colon {
+    flex-direction: column;
+}
+
+.value-name {
+    padding-left: 1rem;
+    flex-direction: column;
+}
+
+.Covered-text {
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.Brand-name {
+    color:rgb(240, 151, 35);
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+.continue-booking {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.6rem;
+}
+
+.continue-booking-button {
+    background-color: rgb(240, 151, 35);
+    color: #fafafa;
+    border: #fafafa;
+    border-radius: 2rem;
+    width: 17rem;
+    height: 2.5rem;
+    font-size: 1.3rem;
+}
+
+.continue-booking-button:hover {
+    cursor: pointer;
+}
+    
+    

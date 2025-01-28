@@ -12,17 +12,18 @@ const initialState = {
     no_of_guests: 0,
     max_guests: 8,
     hotel_data_state: [],
-    single_hotel_data: []
+    single_hotel_data: [],
+    finalPrice: 0
 };
 
 const searchContext = createContext(initialState);
 
 const SearchProvider = ({children}) => {
 
-    const [{ searchModalStatus, searchListModal, checkInDate, checkOutDate, isValidCheckOut, destination, no_of_guests, max_guests, hotel_data_state, single_hotel_data }, dispatchSearch] = useReducer(searchReducer, initialState);
+    const [{ searchModalStatus, searchListModal, checkInDate, checkOutDate, isValidCheckOut, destination, no_of_guests, max_guests, hotel_data_state, single_hotel_data, finalPrice }, dispatchSearch] = useReducer(searchReducer, initialState);
     
     return (
-        <searchContext.Provider value = {{searchModalStatus, searchListModal, checkInDate, checkOutDate, isValidCheckOut, destination, no_of_guests, max_guests, hotel_data_state, single_hotel_data, dispatchSearch}}>
+        <searchContext.Provider value = {{searchModalStatus, searchListModal, checkInDate, checkOutDate, isValidCheckOut, destination, no_of_guests, max_guests, hotel_data_state, single_hotel_data, finalPrice, dispatchSearch}}>
             {children}
         </searchContext.Provider>
     )

@@ -1,12 +1,12 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { ToastContainer, toast } from 'react-toastify';
 
-import "./Home.css"
+import "./Home.css";
+
 import { Navbar, HotelCard, Categories, SearchStayWithDate, SearchList, FilterBox, AuthBox, WishlistLogout } from "../../components";
-import { useCategory } from "../../context";
-import { useSearch, useFilter, useLoginSignUp, useWishlist } from "../../context";
-import { StarRating } from "../../components/filters/starRating/starRating";
+import { useSearch, useFilter, useLoginSignUp, useWishlist, useCategory } from "../../context";
 
 export const Home = () => {
     const [hasMore, sethasMore] = useState(true);
@@ -15,11 +15,13 @@ export const Home = () => {
     const [hotels, sethotels] = useState([]);
     const [loadedData, setLoadedData] = useState([]);
     const [searchFilteredData, setSearchFilteredData] = useState([]);
+    const [showFirst, setShowFirst] = useState(false);
+    const [showSecond, setShowSecond] = useState(false);
 
     const { state } = useCategory();
     const { destination, searchModalStatus, searchListModal, dispatchSearch } = useSearch();
     const { filterModalStatus, priceRange, bedrooms, beds, bathrooms, propertyType, starRating, freeCancellation, apply_status } = useFilter();
-    const { access_token, login_signUp_modalStatus } = useLoginSignUp();
+    const { access_token, signUp_postData_status, login_signUp_modalStatus, signup_test, dispatchLogin_SignUp } = useLoginSignUp();
     const { wishlistModal } = useWishlist();
 
     const handleClickedDestination = (addrss) => {
@@ -34,39 +36,24 @@ export const Home = () => {
             try{
                 const { data } = await axios.get("https://hotels-app-k5v8.onrender.com/api/hotels");
                 setLoadedData(data);
-                //const filteredData = data.filter(item => item.category === state);
-                //settestData(filteredData);
-                //sethotels(filteredData ? filteredData.slice(0, 16): []);
             }catch(err){
                 console.log(err);
             }
         })()
     }, []);
 
-    /*useEffect(() => {
-        if(loadedData) {
-            const filteredData = loadedData.filter(item => item.category === state);
-            settestData(filteredData);
-            
-        }
-    }, [state, loadedData]);
-
-    useEffect(() => {
-        if(testData) {
-            const superFilteredData = testData.filter(item => ((item.price >= priceRange[0] && item.price <= priceRange[1]) && (bedrooms ? item.numberOfBedrooms === Number(bedrooms): true) && (bathrooms? item.numberOfBathrooms === Number(bathrooms): true) && (beds? item.numberOfBeds === Number(beds): true)));
-
-            sethotels(superFilteredData ? superFilteredData.slice(0, 16): []);
-
-            dispatchSearch({
-                type: "Update hotel data",
-                payload: loadedData
-            });
-        }
-    }, [apply_status]);*/
-
     useEffect(() => {
         if(loadedData && apply_status) {
-            const superFilteredData = loadedData.filter(item => ((item.category === state) && (item.price >= priceRange[0] && item.price <= priceRange[1]) && ((bedrooms?((bedrooms === "Any")? true: ((bedrooms === "5+")? item.numberOfBedrooms >= 5: item.numberOfBedrooms === Number(bedrooms))): true) || (bathrooms?((bathrooms === "Any")? true: ((bathrooms === "5+")? item.numberOfBathrooms >= 5: item.numberOfBathrooms === Number(bathrooms))): true) || (beds?((beds === "Any")? true: ((beds === "5+")? item.numberOfBeds >= 5: item.numberOfBeds === Number(beds))): true)) && (propertyType? item.propertyType === propertyType: true) && (starRating? item.rating >= Number(starRating[0]): true) && (freeCancellation? item.isCancelable === freeCancellation: item.isCancelable === false)));
+            const superFilteredData = loadedData.filter(item => ((item.category === state) && 
+            (item.price >= priceRange[0] && item.price <= priceRange[1]) && 
+            ((bedrooms?((bedrooms === "Any")? true: ((bedrooms === "5+")? item.numberOfBedrooms >= 5: item.numberOfBedrooms === Number(bedrooms))): true) || 
+            (bathrooms?((bathrooms === "Any")? true: ((bathrooms === "5+")? item.numberOfBathrooms >= 5: item.numberOfBathrooms === Number(bathrooms))): true) || 
+            (beds?((beds === "Any")? true: ((beds === "5+")? item.numberOfBeds >= 5: item.numberOfBeds === Number(beds))): true)) &&
+            (propertyType? item.propertyType === propertyType: true) && 
+            (starRating? item.rating >= Number(starRating[0]): true) && 
+            (freeCancellation? item.isCancelable === freeCancellation: item.isCancelable === false)));
+
+            
             settestData(superFilteredData);
 
             sethotels(superFilteredData ? superFilteredData.slice(0, 16): []);
@@ -76,7 +63,6 @@ export const Home = () => {
                 payload: loadedData
             });
         
-            
         } else if (loadedData) {
             const filteredData = loadedData.filter(item => item.category === state);
             settestData(filteredData);
@@ -89,8 +75,7 @@ export const Home = () => {
             });
         }
     }, [state, loadedData, apply_status]);
-
-    
+            
 
     const fetchMoreData = () => {
         if(hotels.length >= testData.length){
@@ -110,15 +95,68 @@ export const Home = () => {
 
     useEffect(() => {
         if(loadedData) {
-            const searchFilteredHotelData = loadedData.filter(item => item.address.toLowerCase().includes(destination.toLowerCase()) || item.city.toLowerCase().includes(destination.toLowerCase()));
+            const searchFilteredHotelData = uniqueDestinations.filter(item => item.address.toLowerCase().includes(destination.toLowerCase()) || item.city.toLowerCase().includes(destination.toLowerCase()));
             setSearchFilteredData(searchFilteredHotelData);
         }
     }, [destination]);
 
-    searchFilteredData.forEach(hotel => {
-        console.log(hotel.address, hotel.city);
-    });
+    const hasShownLoginToast = useRef(false);
+    const hasShownLogoutToast = useRef(false);
 
+    
+    useEffect(() => {
+
+        if(access_token && !hasShownLoginToast.current){
+            toast.success("You have been logged in succesfully...", {className: "toast-notify-logout", position: 'bottom-center'});
+            hasShownLoginToast.current = true;
+            hasShownLogoutToast.current = false;
+        }
+        
+    }, [access_token])
+
+    useEffect(() => {
+        if(!access_token && !hasShownLogoutToast.current){
+            toast.success("You have been logged out succesfully...", {className: "toast-notify-logout", position: 'bottom-center'});
+            hasShownLogoutToast.current = true;
+            hasShownLoginToast.current = false;
+        }
+    
+    }, [access_token]);
+
+    useEffect(() => {
+
+        if(signUp_postData_status){
+            
+            alert("You have signed-in succesfully...");
+            dispatchLogin_SignUp({
+                type: "signUp_data_post"
+            })
+        }
+
+    }, [signUp_postData_status]);
+
+    useEffect(() => {
+
+        if(signup_test){
+            toast.success("User already exists...", {className: "toast-notify-user-exists", position: 'bottom-center'});
+            dispatchLogin_SignUp({
+                type: "sign_up_test"
+            })
+        }
+    }, [signup_test]);
+
+    useEffect(() => {
+
+        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+        setShowFirst(true);
+        setShowSecond(false);
+        delay(3000).then(() => {
+            setShowSecond(true);
+            setShowFirst(false);
+        });
+    }, [state, apply_status])
+
+    const uniqueDestinations = Array.from(new Map(loadedData.map(item => [item.city, item])).values());
 
     return (
         <Fragment>
@@ -127,13 +165,14 @@ export const Home = () => {
             {searchModalStatus &&
             <>
             <SearchStayWithDate />
-            {searchListModal && (searchFilteredData.length===0 ?
-            <div className="searchList">
-                {loadedData.map(item => <SearchList onClick={() => handleClickedDestination(item.address)} key={item._id} Hotel_Element={item}/>)}
-            </div>:
-            <div className="searchList">
+            {searchListModal && (destination.length===0 ?
+            (<div className="searchList">
+                {uniqueDestinations.map(item => <SearchList onClick={() => handleClickedDestination(item.address)} key={item._id} Hotel_Element={item}/>)}
+            </div>): (searchFilteredData.length===0 ? (<></>) : 
+            (<div className="searchList">
                 {searchFilteredData.map(item => <SearchList onClick={() => handleClickedDestination(item.address)} key={item._id} Hotel_Element={item}/>)}
-            </div>)}
+            </div>)))
+            }
             
             </> 
             }
@@ -153,21 +192,24 @@ export const Home = () => {
                         dataLength={hotels.length}
                         next={fetchMoreData}
                         hasMore={hasMore}
-                        loader={hotels.length > 0 && <h3 className="loading">Loading...</h3>}
+                        loader={hotels.length > 0 && hotels.length >= 16 && <h3 className="loading">Loading...</h3>}
                         endMessage={hotels.length >= testData.length &&
                             <p className="end-line" style={{ textAlign: 'center' }}>
-                                <b>Yay! You have seen it all</b>
+                                <b>End of Page...</b>
                             </p>
                         }
                     >
                     <main className="main d-flex align-center wrap gap-larger">
                         {hotels && hotels.map(hotel => <HotelCard key={hotel._id} hotel_element={hotel}/>)}
                     </main>
-                    </InfiniteScroll>) : (<></>)
+                    </InfiniteScroll>) : ((showFirst ? <p className="NoData">Loading...</p> : (showSecond && <p className="NoData">No data found...</p>)))
             }
+            <ToastContainer />
         </Fragment>
     )
 };
+    
+
             
             
             
