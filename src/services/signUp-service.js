@@ -3,7 +3,7 @@ import axios from "axios";
 export const signUpHandler = async(name, mobileNumberSignUp, email, signup_password) => {
 
     try{
-        const data = await axios.post( "https://hotels-app-k5v8.onrender.com/api/auth/register",
+        const data = await axios.post( "https://hotels-app-1088011548952.asia-south2.run.app/api/auth/register",
             {
                 username: name,
                 number: mobileNumberSignUp,

@@ -46,7 +46,7 @@ export const deleteWishlistHandler = async(_id, userid, token) => {
         const config = { headers : { userid: userid } };
         config.headers.authorization = token;
 
-        const data = await axios.delete(`https://hotels-app-k5v8.onrender.com/api/wishlist/${_id}`,
+        const data = await axios.delete(`https://hotels-app-1088011548952.asia-south2.run.app/api/wishlist/${_id}`,
             config
         );
 
