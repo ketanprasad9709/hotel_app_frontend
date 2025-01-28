@@ -30,7 +30,7 @@ export const SingleHotelPage = () => {
         (async () => {
             setLoading(true);
             try{
-                const { data } = await axios.get(`https://hotels-app-k5v8.onrender.com/api/hotels/${id}`);
+                const { data } = await axios.get(`https://hotels-app-1088011548952.asia-south2.run.app/api/hotels/${id}`);
                 dispatchSearch({
                     type: "single_hotel_data_load",
                     payload: data
@@ -46,7 +46,7 @@ export const SingleHotelPage = () => {
     useEffect(() => {
         (async () => {
             try{
-                const { data } = await axios.get("https://hotels-app-k5v8.onrender.com/api/hotels");
+                const { data } = await axios.get("https://hotels-app-1088011548952.asia-south2.run.app/api/hotels");
                 setLoadedData(data);
             }catch(err){
                 console.log(err);

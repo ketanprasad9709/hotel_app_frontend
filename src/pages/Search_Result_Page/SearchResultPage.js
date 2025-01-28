@@ -24,7 +24,7 @@ export const SearchResultPage = () => {
     useEffect(() => {
         (async () => {
             try{
-                const { data } = await axios.get("https://hotels-app-k5v8.onrender.com/api/hotels");
+                const { data } = await axios.get("https://hotels-app-1088011548952.asia-south2.run.app/api/hotels");
                 setLoadedData(data);
             }catch(err){
                 console.log(err);

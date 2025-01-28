@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { styled } from '@mui/material';
 
 import { useFilter } from "../../../context";
 
@@ -33,13 +32,13 @@ export const PriceCard = () => {
               sx={{
                 color: '#57a715',
                 '& .MuiSlider-thumb': {
-                  transform: 'translateY(22px)', // Move the thumb downward by 10px
+                  transform: 'translateY(22px)', 
                 },
                 '& .MuiSlider-track': {
-                  transform: 'translateY(30px)', // Move the track downward by 10px as well
+                  transform: 'translateY(30px)', 
                 },
                 '& .MuiSlider-rail': {
-                  transform: 'translateY(30px)', // Optional: move the rail (background) downward as well
+                  transform: 'translateY(30px)', 
                 },
               }}
               min={200}
