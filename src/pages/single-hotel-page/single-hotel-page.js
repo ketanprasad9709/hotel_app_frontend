@@ -18,7 +18,7 @@ export const SingleHotelPage = () => {
     const [searchFilteredData, setSearchFilteredData] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const { access_token, login_signUp_modalStatus, signUp_postData_status, dispatchLogin_SignUp } = useLoginSignUp();
+    const { access_token, login_signUp_modalStatus, signUp_postData_status, hasShownLoginToast, dispatchLogin_SignUp } = useLoginSignUp();
     const { wishlistModal } = useWishlist();
     const { single_hotel_data, searchListModal, searchModalStatus, destination, dispatchSearch } = useSearch();
 
@@ -63,16 +63,15 @@ export const SingleHotelPage = () => {
         }
     }, [destination]);
 
-
-    const hasShownLoginToast = useRef(false);
     const hasShownLogoutToast = useRef(false);
 
     
     useEffect(() => {
 
-        if(access_token && !hasShownLoginToast.current){
+        if(access_token && !hasShownLoginToast){
             toast.success("You have been logged in succesfully...", {className: "toast-notify-logout", position: 'bottom-center'});
-            hasShownLoginToast.current = true;
+            dispatchLogin_SignUp({
+                type: "hasShownLoginToast-handle" });
             hasShownLogoutToast.current = true;
         }
         
@@ -82,10 +81,12 @@ export const SingleHotelPage = () => {
         if(!access_token && hasShownLogoutToast.current){
             toast.success("You have been logged out succesfully...", {className: "toast-notify-logout", position: 'bottom-center'});
             hasShownLogoutToast.current = true;
-            hasShownLoginToast.current = false;
+            dispatchLogin_SignUp({
+                type: "hasShownLoginToast-handle" });
         }
     
     }, [access_token]);
+
 
     useEffect(() => {
 
