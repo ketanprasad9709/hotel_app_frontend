@@ -30,14 +30,10 @@ export const Navbar = () => {
         })
     };
 
-    const handleLogoClick = () => {
-        navigate("/");
-    }
-
     return (
         <header className="heading d-flex align-center">
             <h1 className="heading-1 text-border">
-                <img className="company_logo" onClick={handleLogoClick} src={company_logo_url} alt="Book My hotel!"/>
+                <img className="company_logo" src={company_logo_url} alt="Book My hotel!"/>
             </h1>
 
             {!searchModalStatus && !location.pathname.includes("wishlist") && !location.pathname.includes("ordersummary") && !location.pathname.includes("/book/stay") &&
