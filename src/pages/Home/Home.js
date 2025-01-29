@@ -109,6 +109,7 @@ export const Home = () => {
     useEffect(() => {
 
         if(access_token && !hasShownLoginToast.current){
+            console.log('Access token:', access_token);
             toast.success("You have been logged in succesfully...", {className: "toast-notify-logout", position: 'bottom-center'});
             hasShownLoginToast.current = true;
             hasShownLogoutToast.current = false;
@@ -118,6 +119,7 @@ export const Home = () => {
 
     useEffect(() => {
         if(!access_token && !hasShownLogoutToast.current){
+            console.log('Access token:', access_token);
             toast.success("You have been logged out succesfully...", {className: "toast-notify-logout", position: 'bottom-center'});
             hasShownLogoutToast.current = true;
             hasShownLoginToast.current = false;
