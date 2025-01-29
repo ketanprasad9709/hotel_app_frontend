@@ -116,6 +116,10 @@ export const loginSignUpReducer = (state, {type, payload}) => {
                 ...state,
                 logout: !state.logout
             }
+        case "hasShownLoginToast-handle":
+            return {
+                ...state,
+                hasShownLoginToast: !state.hasShownLoginToast
         default:
             return state;
     };
