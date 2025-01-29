@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import * as ReactToastify from 'react-toastify';
 
 import "./SearchResultPage.css";
 
@@ -11,6 +11,8 @@ import { useSearch, useLoginSignUp, useWishlist } from "../../context";
 
 export const SearchResultPage = () => {
 
+    const { ToastContainer, toast } = ReactToastify;
+    
     const [loadedData, setLoadedData] = useState([]);
     const [searchFilteredData, setSearchFilteredData] = useState([]);
     const [searchResult, setSearchResult] = useState([]);
@@ -24,7 +26,7 @@ export const SearchResultPage = () => {
     useEffect(() => {
         (async () => {
             try{
-                const { data } = await axios.get("https://hotels-app-1088011548952.asia-south2.run.app/api/hotels");
+                const { data } = await axios.get("https://hotels-app-k5v8.onrender.com/api/hotels");
                 setLoadedData(data);
             }catch(err){
                 console.log(err);
