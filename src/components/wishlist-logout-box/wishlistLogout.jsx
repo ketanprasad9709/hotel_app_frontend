@@ -35,7 +35,6 @@ export const WishlistLogout = () => {
         dispatchLogin_SignUp({
             type: "logout-status"
         })
-        navigate("/");
     } 
 
     const handleWishlistCloseClick = () => {
