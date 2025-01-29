@@ -23,7 +23,7 @@ export const Home = () => {
     const { state } = useCategory();
     const { destination, searchModalStatus, searchListModal, dispatchSearch } = useSearch();
     const { filterModalStatus, priceRange, bedrooms, beds, bathrooms, propertyType, starRating, freeCancellation, apply_status } = useFilter();
-    const { access_token, signUp_postData_status, login_signUp_modalStatus, signup_test, hasShownLoginToast, dispatchLogin_SignUp } = useLoginSignUp();
+    const { access_token, signUp_postData_status, login_signUp_modalStatus, signup_test, hasShownLoginToast, hasShownLogoutToast, dispatchLogin_SignUp } = useLoginSignUp();
     const { wishlistModal } = useWishlist();
 
     const handleClickedDestination = (addrss) => {
@@ -101,8 +101,6 @@ export const Home = () => {
             setSearchFilteredData(searchFilteredHotelData);
         }
     }, [destination]);
-    
-    const hasShownLogoutToast = useRef(false);
 
     
     useEffect(() => {
@@ -111,7 +109,8 @@ export const Home = () => {
             toast.success("You have been logged in succesfully...", {className: "toast-notify-logout", position: 'bottom-center'});
             dispatchLogin_SignUp({
                 type: "hasShownLoginToast-handle" });
-            hasShownLogoutToast.current = true;
+            dispatchLogin_SignUp({
+                type: "hasShownLogoutToast-handle" });
         }
         
     }, [access_token])
@@ -119,7 +118,8 @@ export const Home = () => {
     useEffect(() => {
         if(!access_token && hasShownLogoutToast.current){
             toast.success("You have been logged out succesfully...", {className: "toast-notify-logout", position: 'bottom-center'});
-            hasShownLogoutToast.current = true;
+            dispatchLogin_SignUp({
+                type: "hasShownLogoutToast-handle" });
             dispatchLogin_SignUp({
                 type: "hasShownLoginToast-handle" });
         }
