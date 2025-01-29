@@ -116,7 +116,7 @@ export const Home = () => {
     }, [access_token])
 
     useEffect(() => {
-        if(!access_token && hasShownLogoutToast.current){
+        if(!access_token && hasShownLogoutToast){
             toast.success("You have been logged out succesfully...", {className: "toast-notify-logout", position: 'bottom-center'});
             dispatchLogin_SignUp({
                 type: "hasShownLogoutToast-handle" });
