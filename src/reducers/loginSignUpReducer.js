@@ -120,6 +120,7 @@ export const loginSignUpReducer = (state, {type, payload}) => {
             return {
                 ...state,
                 hasShownLoginToast: !state.hasShownLoginToast
+            }
         default:
             return state;
     };
