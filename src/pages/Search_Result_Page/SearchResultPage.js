@@ -53,19 +53,21 @@ export const SearchResultPage = () => {
     useEffect(() => {
 
         if(access_token && !hasShownLoginToast.current){
-            toast.success("You have been logged in succesfully!", {className: "toast-notify-login", position: 'bottom-center'});
+            toast.success("You have been logged in succesfully...", {className: "toast-notify-logout", position: 'bottom-center'});
             hasShownLoginToast.current = true;
-            hasShownLogoutToast.current = false;
+            hasShownLogoutToast.current = true;
         }
         
     }, [access_token])
 
     useEffect(() => {
-        if(!access_token && !hasShownLogoutToast.current){
-            toast.success("You have been logged out succesfully!", {className: "toast-notify-logout", position: 'bottom-center'});
+        if(!access_token && hasShownLogoutToast.current){
+            toast.success("You have been logged out succesfully...", {className: "toast-notify-logout", position: 'bottom-center'});
             hasShownLogoutToast.current = true;
             hasShownLoginToast.current = false;
-        }}, [access_token]);
+        }
+    
+    }, [access_token]);
 
     const handleClickedDestination = (addrss) => {
         dispatchSearch({
