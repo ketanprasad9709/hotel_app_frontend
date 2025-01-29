@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { ToastContainer, toast } from 'react-toastify';
+import * as ReactToastify from 'react-toastify';
 
 import "./Home.css";
 
@@ -9,6 +9,8 @@ import { Navbar, HotelCard, Categories, SearchStayWithDate, SearchList, FilterBo
 import { useSearch, useFilter, useLoginSignUp, useWishlist, useCategory } from "../../context";
 
 export const Home = () => {
+    const { ToastContainer, toast } = ReactToastify;
+
     const [hasMore, sethasMore] = useState(true);
     const [currentIndex, setcurrentIndex] = useState(16);
     const [testData, settestData] = useState([]);
@@ -34,7 +36,7 @@ export const Home = () => {
     useEffect(() => {
         (async () => {
             try{
-                const { data } = await axios.get("https://hotels-app-1088011548952.asia-south2.run.app/api/hotels");
+                const { data } = await axios.get("https://hotels-app-k5v8.onrender.com/api/hotels");
                 setLoadedData(data);
             }catch(err){
                 console.log(err);

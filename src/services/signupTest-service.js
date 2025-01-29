@@ -3,7 +3,7 @@ import axios from "axios";
 export const signUpTestHandler = async(mobileNumberSignUp, email) => {
 
     try{
-        const response = await axios.post( "https://hotels-app-1088011548952.asia-south2.run.app/api/auth/signuptest",
+        const response = await axios.post( "https://hotels-app-k5v8.onrender.com/api/auth/signuptest",
             {
                 number: mobileNumberSignUp,
                 email: email
